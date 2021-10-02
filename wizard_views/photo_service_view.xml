@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="photo_service_form" model="ir.ui.view">
+        <field name="name">photo.service.form</field>
+        <field name="model">photo.service</field>
+        <field name="arch" type="xml">
+            <form string="Photo Service">
+                <header>
+                    <button name="trigger_accept" string="Accept" type="object" class="btn-primary"/>
+                    <button name="trigger_decline" string="Decline" type="object" class="btn-primary"/>
+                    <button name="trigger_load" string="Load" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="site_id"/>
+                        <field name="photo_id"/>
+                        <field name="category_id"/>
+                    </group>
+                    <field name="preview"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="photo_service_action" model="ir.actions.act_window">
+        <field name="name">Photo Service</field>
+        <field name="res_model">photo.service</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="photo_service_menu"
+              name="Photo Service"
+              parent="service_menu"
+              action="photo_service_action"
+              sequence="30"/>
+
+</odoo>

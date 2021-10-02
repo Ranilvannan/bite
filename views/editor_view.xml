@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="blog_editor_form" model="ir.ui.view">
+        <field name="name">blog.editor.form</field>
+        <field name="model">blog.editor</field>
+        <field name="arch" type="xml">
+            <form string="Editor">
+                <header>
+                    <button name="trigger_get_category" string="Load Category" type="object" class="btn-primary"/>
+                    <button name="trigger_get_series" string="Load Series" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <h2><field name="name"/></h2>
+                    <group col="4">
+                        <field name="book_id"/>
+                        <field name="site_id"/>
+                        <field name="category_id"/>
+                        <field name="series_id"/>
+                        <field name="published_on"/>
+                        <field name="in_progress"/>
+                    </group>
+                    <group>
+                        <field name="title"/>
+                        <field name="url"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="gallery_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Content">
+                            <field name="content"/>
+                        </page>
+                        <page string="Duplicate">
+                            <field name="duplicate_ids">
+                                <tree>
+                                    <field name="article_id"/>
+                                    <field name="percentage"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="blog_editor_tree" model="ir.ui.view">
+        <field name="name">blog.editor.tree</field>
+        <field name="model">blog.editor</field>
+        <field name="arch" type="xml">
+            <tree name="Editor">
+                <field name="name"/>
+                <field name="url"/>
+                <field name="title"/>
+                <field name="category_id"/>
+                <field name="series_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="blog_editor_action" model="ir.actions.act_window">
+        <field name="name">Editor</field>
+        <field name="res_model">blog.editor</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="blog_editor_menu"
+              name="Editor"
+              parent="bite_menu"
+              action="blog_editor_action"
+              sequence="20"/>
+
+</odoo>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="blog_series_form" model="ir.ui.view">
+        <field name="name">blog.series.form</field>
+        <field name="model">blog.series</field>
+        <field name="arch" type="xml">
+            <form string="Series">
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="preview"/>
+                        <field name="url"/>
+                        <field name="series_url"/>
+                    </group>
+                    <notebook>
+                        <page string="Article">
+                            <field name="article_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="site_id"/>
+                                    <field name="title"/>
+                                    <field name="category_id"/>
+                                    <field name="series_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="blog_series_tree" model="ir.ui.view">
+        <field name="name">blog.series.tree</field>
+        <field name="model">blog.series</field>
+        <field name="arch" type="xml">
+            <tree name="Series">
+                <field name="title"/>
+                <field name="url"/>
+                <field name="series_url"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="blog_series_action" model="ir.actions.act_window">
+        <field name="name">Series</field>
+        <field name="res_model">blog.series</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="blog_series_menu"
+              name="Series"
+              parent="bite_menu"
+              action="blog_series_action"
+              sequence="50"/>
+
+</odoo>

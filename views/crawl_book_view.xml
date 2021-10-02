@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crawl_book_form" model="ir.ui.view">
+        <field name="name">crawl.book.form</field>
+        <field name="model">crawl.book</field>
+        <field name="arch" type="xml">
+            <form string="Book">
+                <sheet>
+                    <h2><field name="name"/></h2>
+                    <group col="4">
+                        <field name="date"/>
+                        <field name="article_id"/>
+                    </group>
+                    <group col="4" string="Story">
+                        <field name="title"/>
+                        <field name="category"/>
+                        <field name="url"/>
+                        <field name="series_url"/>
+                        <field name="domain_id"/>
+                        <field name="lang_id"/>
+                        <field name="published_on"/>
+                    </group>
+                    <group col="4" string="Status">
+                        <field name="is_url_crawled"/>
+                        <field name="is_content_crawled"/>
+                        <field name="is_category_checked"/>
+                        <field name="is_series_checked"/>
+                        <field name="is_tag_analysed"/>
+                    </group>
+                    <notebook>
+                        <page string="Content">
+                            <field name="content"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="crawl_book_tree" model="ir.ui.view">
+        <field name="name">crawl.book.tree</field>
+        <field name="model">crawl.book</field>
+        <field name="arch" type="xml">
+            <tree name="Book">
+                <field name="name"/>
+                <field name="title"/>
+                <field name="category"/>
+                <field name="series_url"/>
+                <field name="article_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="crawl_book_action" model="ir.actions.act_window">
+        <field name="name">Book</field>
+        <field name="res_model">crawl.book</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="crawl_book_menu"
+              name="Book"
+              parent="bite_menu"
+              action="crawl_book_action"
+              sequence="10"/>
+
+</odoo>

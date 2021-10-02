@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="transfer_service_form" model="ir.ui.view">
+        <field name="name">transfer.service.form</field>
+        <field name="model">transfer.service</field>
+        <field name="arch" type="xml">
+            <form string="Transfer Service">
+                <sheet>
+                    <group>
+                        <field name="transfer_type"/>
+                        <field name="series_id" attrs="{'invisible': [('transfer_type', '=', 'single_story')]}"/>
+                        <field name="story_ids" widget="many2many_tags"
+                               attrs="{'invisible': [('transfer_type', '=', 'series_story')]}"/>
+                    </group>
+                    <button name="trigger_move" string="Move" type="object" class="btn-primary"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="transfer_service_action" model="ir.actions.act_window">
+        <field name="name">Transfer Service</field>
+        <field name="res_model">transfer.service</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="transfer_service_menu"
+              name="Transfer Service"
+              parent="service_menu"
+              action="transfer_service_action"
+              sequence="20"/>
+
+</odoo>

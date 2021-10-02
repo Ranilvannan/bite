@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record model="ir.module.category" id="bite_category">
+            <field name="name">Bite</field>
+            <field name="description">Bite</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="bite_admin" model="res.groups">
+            <field name="name">Admin</field>
+            <field name="category_id" ref="bite_category"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

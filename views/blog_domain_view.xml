@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="blog_domain_form" model="ir.ui.view">
+        <field name="name">blog.domain.form</field>
+        <field name="model">blog.domain</field>
+        <field name="arch" type="xml">
+            <form string="Domain">
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="blog_domain_tree" model="ir.ui.view">
+        <field name="name">blog.domain.tree</field>
+        <field name="model">blog.domain</field>
+        <field name="arch" type="xml">
+            <tree name="Domain">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="blog_domain_action" model="ir.actions.act_window">
+        <field name="name">Domain</field>
+        <field name="res_model">blog.domain</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="blog_domain_menu"
+              name="Domain"
+              parent="master_menu"
+              action="blog_domain_action"
+              sequence="60"/>
+
+</odoo>

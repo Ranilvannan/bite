@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cron_service_form" model="ir.ui.view">
+        <field name="name">cron.service.form</field>
+        <field name="model">cron.service</field>
+        <field name="arch" type="xml">
+            <form string="Service">
+                <sheet>
+                    <group col="1">
+                        <button name="trigger_update_category" string="Update Category" type="object" class="btn-primary"/>
+                        <button name="trigger_update_series" string="Update Series" type="object" class="btn-primary"/>
+                        <button name="trigger_tag_analysis" string="Tag Analysis" type="object" class="btn-primary"/>
+                        <button name="trigger_check_series" string="Check Series" type="object" class="btn-primary"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="cron_service_action" model="ir.actions.act_window">
+        <field name="name">Service</field>
+        <field name="res_model">cron.service</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="cron_service_menu"
+              name="Cron Service"
+              parent="service_menu"
+              action="cron_service_action"
+              sequence="10"/>
+
+</odoo>

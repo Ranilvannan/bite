@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="blog_photo_form" model="ir.ui.view">
+        <field name="name">blog.photo.form</field>
+        <field name="model">blog.photo</field>
+        <field name="arch" type="xml">
+            <form string="Photo">
+                <sheet>
+                    <h2><field name="name"/></h2>
+                    <group col="4">
+                        <field name="photo_url"/>
+                        <field name="status"/>
+                        <field name="category_id"/>
+                        <field name="article_id"/>
+                        <field name="is_exported"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="blog_photo_tree" model="ir.ui.view">
+        <field name="name">blog.photo.tree</field>
+        <field name="model">blog.photo</field>
+        <field name="arch" type="xml">
+            <tree name="Photo">
+                <field name="name"/>
+                <field name="photo_url"/>
+                <field name="status"/>
+                <field name="category_id"/>
+                <field name="article_id"/>
+                <field name="is_exported"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="blog_photo_action" model="ir.actions.act_window">
+        <field name="name">Photo</field>
+        <field name="res_model">blog.photo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="blog_photo_menu"
+              name="Photo"
+              parent="bite_menu"
+              action="blog_photo_action"
+              sequence="40"/>
+
+</odoo>

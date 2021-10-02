@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tag_pins_form" model="ir.ui.view">
+        <field name="name">tag.pins.form</field>
+        <field name="model">tag.pins</field>
+        <field name="arch" type="xml">
+            <form string="Tag Pins">
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="tag_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tag_pins_tree" model="ir.ui.view">
+        <field name="name">tag.pins.tree</field>
+        <field name="model">tag.pins</field>
+        <field name="arch" type="xml">
+            <tree name="Tag Pins">
+                <field name="name"/>
+                <field name="tag_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tag_pins_action" model="ir.actions.act_window">
+        <field name="name">Tag Pins</field>
+        <field name="res_model">tag.pins</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="tag_pins_menu"
+              name="Tag Pins"
+              parent="master_menu"
+              action="tag_pins_action"
+              sequence="40"/>
+
+</odoo>
