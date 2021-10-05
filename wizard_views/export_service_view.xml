@@ -27,6 +27,6 @@
               name="Export Service"
               parent="service_menu"
               action="export_service_action"
-              sequence="40"/>
+              sequence="50"/>
 
 </odoo>

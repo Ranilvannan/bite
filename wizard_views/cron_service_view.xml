@@ -28,6 +28,6 @@
               name="Cron Service"
               parent="service_menu"
               action="cron_service_action"
-              sequence="10"/>
+              sequence="20"/>
 
 </odoo>

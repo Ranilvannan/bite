@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crawl_service_form" model="ir.ui.view">
+        <field name="name">crawl.service.form</field>
+        <field name="model">crawl.service</field>
+        <field name="arch" type="xml">
+            <form string="Crawl Service">
+                <sheet>
+                    <group>
+                        <field name="project"/>
+                        <field name="crawl_type"/>
+                        <field name="page_no"/>
+                    </group>
+                    <button name="trigger_crawl" string="Crawl" type="object" class="btn-primary"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="crawl_service_action" model="ir.actions.act_window">
+        <field name="name">Crawl Service</field>
+        <field name="res_model">crawl.service</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="crawl_service_menu"
+              name="Crawl Service"
+              parent="service_menu"
+              action="crawl_service_action"
+              sequence="10"/>
+
+</odoo>

@@ -33,6 +33,6 @@
               name="Photo Service"
               parent="service_menu"
               action="photo_service_action"
-              sequence="30"/>
+              sequence="40"/>
 
 </odoo>

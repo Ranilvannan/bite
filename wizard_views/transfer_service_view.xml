@@ -29,6 +29,6 @@
               name="Transfer Service"
               parent="service_menu"
               action="transfer_service_action"
-              sequence="20"/>
+              sequence="30"/>
 
 </odoo>
