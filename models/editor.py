@@ -20,7 +20,12 @@ class BlogEditor(models.Model):
     duplicate_ids = fields.One2many(comodel_name="article.duplicate", inverse_name="editor_id", string="Duplicates")
     in_progress = fields.Boolean(string="In Progress", default=False)
 
+    def check_site(self):
+        if not self.site_id:
+            raise exceptions.ValidationError("Error! Site not found")
+
     def trigger_get_category(self):
+        self.check_site()
         pin_id = self.env["category.pins"].search([("category_id.site_id", "=", self.site_id.id),
                                                    ("name", "=", self.book_id.category)])
         if not pin_id:
@@ -49,12 +54,10 @@ class BlogEditor(models.Model):
         pass
 
     def trigger_check_duplicate(self):
-        in_progress = self.env["blog.editor"].search([("in_progress", "=", True),
-                                                      ("id", "=", self.id)])
+        recs = self.env["blog.editor"].search([("in_progress", "=", True), ("id", "!=", self.id)])
 
-        if in_progress:
-            raise exceptions.ValidationError("Error!")
-
+        if recs:
+            raise exceptions.ValidationError("Error! Another record In-Progress")
 
         self.write({"in_progress": True})
 
