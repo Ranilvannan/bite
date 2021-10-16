@@ -12,6 +12,7 @@
                         <field name="preview"/>
                         <field name="url"/>
                         <field name="series_url"/>
+                        <field name="is_crawled"/>
                     </group>
                     <notebook>
                         <page string="Article">

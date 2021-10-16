@@ -55,7 +55,7 @@ class CrawlTamilkamaveri(models.Model):
 
         while (url not in old_url) and url:
             article_html = get_url_content(url)
-            self.generate_article(article_html)
+            self.generate_article(article_html, rec.id)
             old_url.append(url)
             url = self.get_next_page(article_html)
 
@@ -113,28 +113,32 @@ class CrawlTamilkamaveri(models.Model):
 
         return result
 
-    def generate_article(self, soup):
+    def generate_article(self, soup, series_id=False):
         domain_id = self.env["blog.domain"].search([("code", "=", self._code)])
         article_list = soup.find_all("article")
 
         for article in article_list:
+            data = {"is_url_crawled": True}
             url = self.article_url(article)
             rec = self.env["crawl.book"].search([("url", "=", url)])
+
+            if series_id:
+                data["series_id"] = series_id
 
             if not rec:
                 title = self.article_title(article)
                 category = self.article_category(article)
                 published_on = self.article_published_on(article)
                 cat_pin_id = self.env["category.pins"].create_if_not_exist(name=category)
-
-                self.env["crawl.book"].create({
+                data.append({
                     "url": url,
                     "title": title,
                     "cat_pin_id": cat_pin_id.id,
                     "domain_id": domain_id.id,
                     "published_on": published_on.strftime("%Y-%m-%d %H:%M:%S"),
-                    "is_url_crawled": True
                 })
+
+                self.env["crawl.book"].create(data)
 
     def get_next_page(self, soup):
         url = None

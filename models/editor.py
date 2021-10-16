@@ -9,7 +9,7 @@ class BlogEditor(models.Model):
     name = fields.Char(string="Name", readonly=True)
     book_id = fields.Many2one(comodel_name="crawl.book", string="Book")
     url = fields.Char(string="URL")
-    site_id = fields.Many2one(comodel_name="blog.site", string="Site", required=True)
+    site_id = fields.Many2one(comodel_name="blog.site", string="Site")
     title = fields.Text(string="Title")
     category_id = fields.Many2one(comodel_name="blog.category", string="Category")
     content = fields.Text(string="Content")
