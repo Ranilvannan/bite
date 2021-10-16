@@ -130,7 +130,7 @@ class CrawlTamilkamaveri(models.Model):
                 category = self.article_category(article)
                 published_on = self.article_published_on(article)
                 cat_pin_id = self.env["category.pins"].create_if_not_exist(name=category)
-                data.append({
+                data.update({
                     "url": url,
                     "title": title,
                     "cat_pin_id": cat_pin_id.id,
