@@ -22,7 +22,7 @@ class CrawlTamilkamaveri(models.Model):
 
     def content_crawl(self):
         recs = self.env["crawl.book"].search([("is_url_crawled", "=", True),
-                                              ("is_content_crawled", "=", False)])[:1]
+                                              ("is_content_crawled", "=", False)])[:5]
 
         for rec in recs:
             data = {"is_content_crawled": True}
@@ -31,7 +31,7 @@ class CrawlTamilkamaveri(models.Model):
             series_url = self.article_series(article_html)
 
             if series_url:
-                series_id = self.env["category.pins"].create_if_not_exist(series_url=series_url)
+                series_id = self.env["blog.series"].create_if_not_exist(series_url=series_url)
                 data["series_id"] = series_id.id
                 series_id.write({"is_crawled": False})
 
@@ -43,7 +43,23 @@ class CrawlTamilkamaveri(models.Model):
             rec.write(data)
 
     def series_crawl(self):
-        pass
+        recs = self.env["blog.series"].search([("is_crawled", "=", False)])[:5]
+
+        # Not to raise exception if no records found
+        if not recs:
+            return True
+
+        rec = recs[0]
+        url = rec.series_url
+        old_url = list()
+
+        while (url not in old_url) and url:
+            article_html = get_url_content(url)
+            self.generate_article(article_html)
+            old_url.append(url)
+            url = self.get_next_page(article_html)
+
+        rec.write({"is_crawled": True})
 
     def article_title(self, article):
         result = None
@@ -117,4 +133,15 @@ class CrawlTamilkamaveri(models.Model):
                     "published_on": published_on.strftime("%Y-%m-%d %H:%M:%S"),
                     "is_url_crawled": True
                 })
+
+    def get_next_page(self, soup):
+        url = None
+        next_page_list = soup.find_all("a", class_="next page-numbers")
+
+        if next_page_list:
+            next_page = next_page_list[0]
+            url = clean_url(next_page["href"])
+
+        return url
+
 
