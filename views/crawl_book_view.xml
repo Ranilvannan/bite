@@ -23,8 +23,6 @@
                     <group col="4" string="Status">
                         <field name="is_url_crawled"/>
                         <field name="is_content_crawled"/>
-                        <field name="is_category_checked"/>
-                        <field name="is_series_checked"/>
                         <field name="is_tag_analysed"/>
                     </group>
                     <notebook>

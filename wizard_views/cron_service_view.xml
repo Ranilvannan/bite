@@ -8,10 +8,7 @@
             <form string="Service">
                 <sheet>
                     <group col="1">
-                        <button name="trigger_update_category" string="Update Category" type="object" class="btn-primary"/>
-                        <button name="trigger_update_series" string="Update Series" type="object" class="btn-primary"/>
                         <button name="trigger_tag_analysis" string="Tag Analysis" type="object" class="btn-primary"/>
-                        <button name="trigger_check_series" string="Check Series" type="object" class="btn-primary"/>
                     </group>
                 </sheet>
             </form>

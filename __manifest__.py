@@ -30,7 +30,7 @@
         'views/tag_analysis_view.xml',
         'wizard_views/crawl_service_view.xml',
         'wizard_views/cron_service_view.xml',
-        # 'wizard_views/transfer_service_view.xml',
+        'wizard_views/transfer_service_view.xml',
         'wizard_views/photo_service_view.xml',
         'wizard_views/export_service_view.xml'
     ],

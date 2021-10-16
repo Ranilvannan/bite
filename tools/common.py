@@ -23,3 +23,8 @@ def get_url_content(url):
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
     return soup
+
+
+def get_content(html):
+    soup = BeautifulSoup(html, 'html.parser')
+    return soup.text

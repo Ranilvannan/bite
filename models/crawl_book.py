@@ -13,7 +13,7 @@ class CrawlBook(models.Model):
     url = fields.Char(string="URL")
     domain_id = fields.Many2one(comodel_name="blog.domain", string="Domain")
     title = fields.Text(string="Title")
-    cat_pin_id = fields.Many2one(comodel_name="category.pins", string="Category Pins")
+    cat_pin_id = fields.Many2one(comodel_name="category.pins", string="Category Pin")
     series_id = fields.Many2one(comodel_name="blog.series", string="Series")
     content = fields.Text(string="Content")
     published_on = fields.Datetime(string="Published On")
@@ -22,8 +22,6 @@ class CrawlBook(models.Model):
 
     is_url_crawled = fields.Boolean(string="Is URL", default=False)
     is_content_crawled = fields.Boolean(string="Is Content", default=False)
-    is_category_checked = fields.Boolean(string="Is Category Checked", default=False)
-    is_series_checked = fields.Boolean(string="Is Series Checked", default=False)
     is_tag_analysed = fields.Boolean(string="Is Analysed", default=False)
 
     @api.model

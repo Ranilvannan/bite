@@ -11,7 +11,6 @@ class BlogSeries(models.Model):
     title = fields.Text(string="Title")
     preview = fields.Text(string="Preview")
     series_url = fields.Char(string="Series URL")
-    last_updated = fields.Date(string="Last Updated", default=datetime.now())
     is_crawled = fields.Boolean(string="Is Crawled", default=False)
     article_ids = fields.One2many(comodel_name="blog.article", inverse_name="series_id", string="Articles")
 

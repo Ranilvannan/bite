@@ -11,7 +11,7 @@ class TransferService(models.TransientModel):
     story_ids = fields.Many2many(comodel_name="crawl.book", string="Stories",
                                  domain="[('is_content_crawled', '=', True),('article_id', '=', False)]")
     series_id = fields.Many2one(comodel_name="blog.series", string="Series",
-                                domain="[('is_story_available', '=', True)]")
+                                domain="[('is_crawled', '=', True)]")
     transfer_type = fields.Selection(selection=TRANSFER_TYPE, string="Transfer Type", default="story")
 
     def trigger_move(self):
@@ -21,7 +21,7 @@ class TransferService(models.TransientModel):
         elif self.transfer_type == "series_story":
             recs = self.env["crawl.book"].search([('is_content_crawled', '=', True),
                                                   ('article_id', '=', False),
-                                                  ("series_url", "=", self.series_id.series_url)])
+                                                  ("series_id", "=", self.series_id.id)])
 
         for rec in recs:
             editor_id = self.env["blog.editor"].search([("book_id", "=", rec.id)])
