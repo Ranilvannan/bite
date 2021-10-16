@@ -114,6 +114,7 @@ class CrawlTamilkamaveri(models.Model):
         return result
 
     def generate_article(self, soup):
+        domain_id = self.env["blog.domain"].search([("code", "=", self._code)])
         article_list = soup.find_all("article")
 
         for article in article_list:
@@ -130,6 +131,7 @@ class CrawlTamilkamaveri(models.Model):
                     "url": url,
                     "title": title,
                     "cat_pin_id": cat_pin_id.id,
+                    "domain_id": domain_id.id,
                     "published_on": published_on.strftime("%Y-%m-%d %H:%M:%S"),
                     "is_url_crawled": True
                 })
