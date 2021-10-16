@@ -9,7 +9,7 @@
                 <sheet>
                     <group col="4">
                         <field name="name"/>
-                        <field name="category_id"/>
+                        <field name="category_ids" widget="many2many_tags"/>
                     </group>
                 </sheet>
             </form>
@@ -22,7 +22,6 @@
         <field name="arch" type="xml">
             <tree name="Category Pins">
                 <field name="name"/>
-                <field name="category_id"/>
             </tree>
         </field>
     </record>

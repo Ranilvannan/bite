@@ -14,11 +14,10 @@
                     </group>
                     <group col="4" string="Story">
                         <field name="title"/>
-                        <field name="category"/>
+                        <field name="cat_pin_id"/>
                         <field name="url"/>
-                        <field name="series_url"/>
+                        <field name="series_id"/>
                         <field name="domain_id"/>
-                        <field name="lang_id"/>
                         <field name="published_on"/>
                     </group>
                     <group col="4" string="Status">
@@ -45,8 +44,8 @@
             <tree name="Book">
                 <field name="name"/>
                 <field name="title"/>
-                <field name="category"/>
-                <field name="series_url"/>
+                <field name="cat_pin_id"/>
+                <field name="series_id"/>
                 <field name="article_id"/>
             </tree>
         </field>

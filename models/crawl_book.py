@@ -12,10 +12,9 @@ class CrawlBook(models.Model):
 
     url = fields.Char(string="URL")
     domain_id = fields.Many2one(comodel_name="blog.domain", string="Domain")
-    lang_id = fields.Many2one(comodel_name="blog.language", string="Language")
     title = fields.Text(string="Title")
-    category = fields.Char(string="category")
-    series_url = fields.Char(string="Series URL")
+    cat_pin_id = fields.Many2one(comodel_name="category.pins", string="Category Pins")
+    series_id = fields.Many2one(comodel_name="blog.series", string="Series")
     content = fields.Text(string="Content")
     published_on = fields.Datetime(string="Published On")
 
