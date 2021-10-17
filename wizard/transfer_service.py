@@ -28,14 +28,17 @@ class TransferService(models.TransientModel):
 
         for rec in recs:
             editor_id = self.env["blog.editor"].search([("book_id", "=", rec.id)])
+            data = {
+                "name": rec.name,
+                "book_id": rec.id,
+                "title": rec.title,
+                "content": rec.content
+            }
+
+            if rec.series_id:
+                data["series_id"] = rec.series_id.id
 
             if not editor_id:
-                data = {
-                    "name": rec.name,
-                    "book_id": rec.id,
-                    "title": rec.title,
-                    "content": rec.content,
-                }
                 self.env["blog.editor"].create(data)
 
     def check_editor(self):

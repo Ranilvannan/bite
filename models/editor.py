@@ -1,4 +1,5 @@
 from odoo import models, fields, exceptions
+import Levenshtein as lv
 
 
 class BlogEditor(models.Model):
@@ -26,8 +27,8 @@ class BlogEditor(models.Model):
 
     def trigger_get_category(self):
         self.check_site()
-        pin_id = self.env["category.pins"].search([("category_id.site_id", "=", self.site_id.id),
-                                                   ("name", "=", self.book_id.category)])
+        pin_id = self.env["blog.category"].search([("site_id", "=", self.site_id.id),
+                                                   ("pin_ids.id", "=", self.book_id.category)])
         if not pin_id:
             raise exceptions.ValidationError("Error! Category pins not found")
 
@@ -36,24 +37,13 @@ class BlogEditor(models.Model):
 
         self.write({"category_id": pin_id.category_id.id})
 
-    def trigger_get_series(self):
-        if self.book_id.series_url:
-            series_id = self.env["blog.series"].search([("series_url", "=", self.book_id.series_url)])
-            if not series_id:
-                raise exceptions.ValidationError("Error! Series not found")
-
-            if not series_id.url:
-                raise exceptions.ValidationError("Error! Series URL not found")
-
-            self.write({"series_id": series_id.id})
-
     def trigger_get_tags(self):
         pass
 
     def trigger_get_galleries(self):
         pass
 
-    def trigger_check_duplicate(self):
+    def trigger_check_progress(self):
         recs = self.env["blog.editor"].search([("in_progress", "=", True), ("id", "!=", self.id)])
 
         if recs:
@@ -63,6 +53,14 @@ class BlogEditor(models.Model):
 
     def trigger_generate_article(self):
         pass
+
+    def trigger_check_duplicate(self):
+        recs = self.env["blog.article"].search([("analysis_ref", "=", self.name)])[:10]
+
+        duplicate_ids = [(0, 0, {"article_id": rec.id,
+                                 "percentage": lv.ratio(self.content, rec.content)}) for rec in recs]
+
+        self.write({"duplicate_ids": duplicate_ids})
 
 
 class ArticleDuplicate(models.Model):
